@@ -17,6 +17,7 @@ namespace FoodNStuff.MVC.Models
         [Required]
         public string LastName { get; set; }
 
+        [Display(Name = "Full Name")]
         // below is same as  public string FullName => return $"{FirstName} {LastName}";
         public string FullName
         {
