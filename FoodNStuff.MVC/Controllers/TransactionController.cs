@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -41,6 +42,22 @@ namespace FoodNStuff.MVC.Controllers
             ViewBag.CustomerID = new SelectList(_db.Customers.ToList(), "CustomerID", "FullName");
             ViewBag.ProductID = new SelectList(_db.Products.ToList(), "ProductID", "Name");
 
+            return View(transaction);
+        }
+
+        // GET: Transaction/Details/{id}
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Transaction transaction = _db.Transactions.Find(id);
+
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
             return View(transaction);
         }
     }
